@@ -1,7 +1,7 @@
 import numpy as np
 from PIL import Image
 
-from modules.loader import load_image
+from src.modules.loader import load_image
 
 
 def test_load_image(tmp_path):
