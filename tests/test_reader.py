@@ -5,12 +5,13 @@ from unittest.mock import Mock
 # Подменяем EasyOCR
 sys.modules["easyocr"] = Mock()
 
-from modules.reader import Reader, TextBlock
+from src.modules.reader import Reader, TextBlock
 
 
 def test_text_block():
-    block = TextBlock(text="Привет", confidence=0.95)
+    block = TextBlock(box_coords=[[0,0], [0,1], [1,1], [1,0]], text="Привет", confidence=0.95)
 
+    assert block.box_coords == [[0,0], [0,1], [1,1], [1,0]]
     assert block.text == "Привет"
     assert block.confidence == 0.95
 
@@ -20,8 +21,8 @@ def test_reader_recognize():
 
     fake_model = Mock()
     fake_model.readtext.return_value = [
-        (None, "Привет", 0.95),
-        (None, "Мир", 0.85)
+        ([[0,0], [0,1], [1,1], [1,0]], "Привет", 0.95),
+        ([[0,2], [0,3], [1,3], [1,2]], "Мир", 0.85)
     ]
 
     reader.model = fake_model
