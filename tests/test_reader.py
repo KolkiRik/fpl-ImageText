@@ -5,7 +5,7 @@ from unittest.mock import Mock
 # Подменяем EasyOCR
 sys.modules["easyocr"] = Mock()
 
-from modules.reader import Reader, TextBlock
+from src.modules.reader import Reader, TextBlock
 
 
 def test_text_block():
