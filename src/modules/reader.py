@@ -5,11 +5,13 @@ from pydantic import BaseModel
 class TextBlock(BaseModel):
     """
     Класс одного распознонного текста
-    
-    Аттрибуты:
+
+    Attributes:
+        box_coords: координаты фрагмента, в котором был найден текст (левая верхняя, правая верхняя, правая нижняя, левая нижняя)
         text: распознанный текст (строка)
         confidence: уверенность модели в правильности прочитанного текста (от 0 до 1)
     """
+    box_coords: list[list[float]]
     text: str
     confidence: float
 
@@ -26,11 +28,11 @@ class Reader:
         """
         Функция распознования текста на изображении.
 
-        Параметры:
+        Args:
             image: numpy-массив RGB, полученный из load_image().
 
-        Возвращает:
+        Returns:
             Список TextBlock — по одному на каждый найденный фрагмент.
         """
         raw_text = self.model.readtext(image)
-        return [TextBlock(text=raw_t, confidence=float(raw_c)) for _, raw_t, raw_c in raw_text]
+        return [TextBlock(box_coords = raw_b, text=raw_t, confidence=float(raw_c)) for raw_b, raw_t, raw_c in raw_text]
