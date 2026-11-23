@@ -30,7 +30,6 @@ def main():
             height = block.box_coords[2][1] - block.box_coords[1][1]
             font_print = render_text(block.text, "arial.ttf", 15, int(width), int(height))
             img_frag = get_image_text_fragment(image, block.box_coords)
-            # print(font_print, img_frag, sep="\n")
             print(f"{i}: {block.text}  (уверенность: {block.confidence:.2f}) (сходство по шрифту: {glyph_similarity(img_frag, font_print)})")
 
         print("\n")
