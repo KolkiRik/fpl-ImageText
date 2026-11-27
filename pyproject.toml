@@ -19,6 +19,9 @@ build-backend = "poetry.core.masonry.api"
 pythonpath = ["."]
 testpaths = ["tests"]
 
+[tool.poetry]
+package-mode = false # kolkirik: Пока что это не пакет
+
 [[tool.poetry.source]]
 name = "pytorch_cpu"
 url = "https://download.pytorch.org/whl/cpu"
