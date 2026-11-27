@@ -1,3 +1,80 @@
+[project]
+name = "fpl-imagetext"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Your Name",email = "you@example.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13, <3.14.1"
+dependencies = [
+    "torch (>=2.15.0,<3.0.0)",
+    "torchvision (>=0.29.2,<0.30)",
+    "numpy (>=2.5.5,<3.0.0)",
+    "pydantic (>=2.14.4,<3.0.0)",
+    "pillow (>=13.0.0,<14.0.0)",
+    "opencv-python (>=5.1.0.95,<6.0.0.0)",
+    "easyocr (>=1.7.2,<2.0.0)"
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.pytest.ini_options]
 pythonpath = ["."]
 testpaths = ["tests"]
+
+[tool.poetry]
+package-mode = false # kolkirik: Пока что это не пакет
+
+[[tool.poetry.source]]
+name = "pytorch_cpu"
+url = "https://download.pytorch.org/whl/cpu"
+priority = "explicit"
+
+[tool.poetry.dependencies]
+torch = {source = "pytorch_cpu"}
+torchvision = {source = "pytorch_cpu"}
+
+[dependency-groups]
+dev = [
+    "pytest (>=9.2.0,<10.0.0)",
+    "ruff (>=0.17.6,<0.18.0)",
+    "black (>=26.10.1,<27.0.0)",
+    "isort (>=9.0.2,<10.0.0)",
+    "pre-commit (>=4.7.0,<5.0.0)"
+]
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+line_length = 120
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+
+[tool.ruff.lint]
+select = [
+    'E',  # ошибки стиля кода по PEP 8
+    'F',  # ошибки кода, например неиспользуемые импорты
+    'W',  # предупреждения о стиле кода
+    'C90',  # избыточная сложность функций
+    'B',  # потенциальные ошибки и опасные конструкции
+    'I',  # порядок импортов
+    'D',  # оформление docstring
+    'RUF',  # собственные правила Ruff
+]
+ignore = [
+    'D100',  # не требовать docstring для каждого публичного модуля
+    'E501',  # переносами строк управляет форматтер
+    'RUF001', 'RUF002', 'RUF003',  # разрешить похожие на латиницу символы кириллицы в строках, docstring и комментариях
+    'D203', # kolkirik: пробел перед двоеточием не разрешен
+    'D213', # kolkirik: комментарии в несколько строк разрешены
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["E402"] # Ошибка E402 - import not at top of file, нам ее нужно проигнорировать в связи с mock-моделью

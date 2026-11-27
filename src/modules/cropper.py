@@ -1,8 +1,8 @@
 import numpy as np
 
+
 def get_image_text_fragment(image: np.ndarray, bbox: list[list[float]]) -> np.ndarray:
-    """
-    Функция вырезает фрагмент из изображения по заданным угловым координатам
+    """Функция вырезает фрагмент из изображения по заданным угловым координатам.
 
     Args:
         image: загруженное изображение в виде numpy-массива формы (высота, ширина, 3).
@@ -10,6 +10,7 @@ def get_image_text_fragment(image: np.ndarray, bbox: list[list[float]]) -> np.nd
 
     Returns:
         numpy-массив формы (высота, ширина, 3) в формате RGB.
+
     """
     bbox = np.array(bbox, dtype=np.int32)
 

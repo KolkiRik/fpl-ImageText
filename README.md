@@ -11,7 +11,8 @@ ImageText — утилита, которая принимает изображе
 ## Требования
 
 - Python 3.13.
-- Установленные зависимости из `requirements.txt`.
+- Poetry 2.x
+- Make (для удобных команд)
 
 ## Установка
 
@@ -19,16 +20,20 @@ ImageText — утилита, которая принимает изображе
    ```bash
    git clone https://github.com/KolkiRik/fpl-ImageText.git
    ```
-2. Создайте и активируйте виртуальное окружение:
+2. Установите необходимые зависимости (poetry сам создаст окружение):
    ```bash
-   python -m venv .venv
-   .venv\Scripts\activate
+   make install
    ```
-3. Загрузите необходимые библиотеки:
+   Или напрямую:
    ```bash
-   pip install -r requirements.txt
+   poetry install
    ```
+
 ## Запуск программы (тестовой версии)
    ```bash
-   python src/main.py
+   make run
+   ```
+   Или напрямую:
+   ```bash
+   poetry run python src/main.py
    ```
