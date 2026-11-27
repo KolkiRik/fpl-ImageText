@@ -1,4 +1,3 @@
-
 import sys
 from unittest.mock import Mock
 
@@ -9,20 +8,22 @@ from src.modules.reader import Reader, TextBlock
 
 
 def test_text_block():
-    block = TextBlock(box_coords=[[0,0], [0,1], [1,1], [1,0]], text="Привет", confidence=0.95)
+    """Проверяет.....заглушка."""
+    block = TextBlock(box_coords=[[0, 0], [0, 1], [1, 1], [1, 0]], text="Привет", confidence=0.95)
 
-    assert block.box_coords == [[0,0], [0,1], [1,1], [1,0]]
+    assert block.box_coords == [[0, 0], [0, 1], [1, 1], [1, 0]]
     assert block.text == "Привет"
     assert block.confidence == 0.95
 
 
 def test_reader_recognize():
+    """Проверяет.....заглушка."""
     reader = Reader.__new__(Reader)
 
     fake_model = Mock()
     fake_model.readtext.return_value = [
-        ([[0,0], [0,1], [1,1], [1,0]], "Привет", 0.95),
-        ([[0,2], [0,3], [1,3], [1,2]], "Мир", 0.85)
+        ([[0, 0], [0, 1], [1, 1], [1, 0]], "Привет", 0.95),
+        ([[0, 2], [0, 3], [1, 3], [1, 2]], "Мир", 0.85),
     ]
 
     reader.model = fake_model

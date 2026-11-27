@@ -1,0 +1,25 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.3  # фиксированная версия Ruff
+    hooks:
+      - id: ruff-check  # линтер: сначала исправить доступные нарушения
+      - id: ruff-format  # форматтер: привести код к единому оформлению
+
+  - repo: local  # локальные хуки проекта
+    hooks:
+      - id: pytest
+        name: Run tests
+        entry: poetry run pytest # запуск тестов через poetry
+        language: system  # запуск команды без отдельного окружения хука
+        pass_filenames: false  # запускать весь набор тестов, не передавать имена измененных файлов
+
+  - repo: https://github.com/psf/black
+    rev: 25.9.0
+    hooks:
+      - id: black
+
+  - repo: https://github.com/PyCQA/isort
+    rev: 7.0.0
+    hooks:
+      - id: isort
+        args: ["--profile=black"]

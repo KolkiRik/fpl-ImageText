@@ -5,6 +5,7 @@ from src.modules.loader import load_image
 
 
 def test_load_image(tmp_path):
+    """Проверяет.....заглушка."""
     image_path = tmp_path / "test.png"
 
     image = Image.new("RGB", (20, 10), color=(255, 0, 0))
